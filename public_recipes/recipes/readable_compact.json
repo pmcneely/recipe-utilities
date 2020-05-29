@@ -1,0 +1,167 @@
+{
+  "recipe_name": "Generified recipe",
+  "description": "A basic recipe template, loosely adapted. I highly doubt this would taste good - don't make it!",
+  "recipe_uuid": "49795bee-a1c4-11ea-b638-957c2962faf9",
+  "source_url": "https://172.10.0.2/this-address-is-not-dns-addressable/",
+  "components": [
+    {
+      "name": "Main",
+      "ingredients": [
+        {
+          "name": "noodles",
+          "amount": 8,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        },
+        {
+          "name": "oil",
+          "amount": 3,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        },
+        {
+          "name": "garlic",
+          "amount": 3,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        },
+        {
+          "name": "eggs",
+          "amount": 2,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        },
+        {
+          "name": "chicken",
+          "amount": 8,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        },
+        {
+          "name": "sweet capsicum, green",
+          "amount": 1,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        },
+        {
+          "name": "green onions",
+          "amount": 3,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        },
+        {
+          "name": "onion",
+          "amount": 0.5,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        }
+      ]
+    },
+    {
+      "name": "tasty sauce",
+      "ingredients": [
+        {
+          "name": "fish sauce",
+          "amount": 3,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        },
+        {
+          "name": "soy sauce",
+          "amount": 1,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        },
+        {
+          "name": "palm sugar",
+          "amount": 5,
+          "processing": null,
+          "notes": null,
+          "substitutions": [],
+          "usda_num": 0
+        },
+        {
+          "name": "tamarind paste",
+          "amount": 2,
+          "processing": null,
+          "notes": null,
+          "substitutions": [
+            {
+              "name": "rice vinegar",
+              "amount": 2,
+              "processing": null,
+              "notes": null,
+              "substitutions": [],
+              "usda_num": 0
+            }
+          ],
+          "usda_num": 0
+        }
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "name": "Noodles",
+      "steps": [
+        {
+          "instruction": "Cook noodles according to package instructions."
+        }
+      ],
+      "haccp": null,
+      "notes": []
+    },
+    {
+      "name": "Sauce",
+      "steps": [
+        {
+          "instruction": "Mix the sauce ingredients together. Set aside while preparing the rest of the ingredients"
+        }
+      ],
+      "haccp": null,
+      "notes": []
+    },
+    {
+      "name": "Main",
+      "steps": [
+        {
+          "instruction": "Heat oil in a large saucepan, allow to reach even heat at medium/medium-high."
+        },
+        {
+          "instruction": "Add the onion, garlic and capsicum. Sautee until wilted, about 3-5 minutes."
+        },
+        {
+          "instruction": "Add chicken, cook until just cooked through, about 3-4 more minutes."
+        },
+        {
+          "instruction": "Add a little more oil and add the beaten eggs. Scramble the eggs while cooking."
+        },
+        {
+          "instruction": "Add noodles, sauce. Toss everything to combine."
+        }
+      ],
+      "haccp": null,
+      "notes": []
+    }
+  ]
+}

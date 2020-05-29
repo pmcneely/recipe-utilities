@@ -1,9 +1,12 @@
-import json
+#!/usr/bin/env python3
 
-import recipe_template as rt
+import json
+import os
+import sys
 
 from ruamel.yaml import YAML
 
+import recipe_template as rt
 
 def get_basic_recipe():
 
@@ -54,18 +57,12 @@ def get_basic_recipe():
                 "Add noodles, sauce. Toss everything to combine.",
             ],
         },
-        "url": "https://172.10.0.2/this-address-is-not-dns-capable/",
-        "book": "my upcoming book",
+        "url": "https://172.10.0.2/this-address-is-not-dns-addressable/",
+        "book": "my upcoming book, ca. 2095",
         "text_link": "",
     }
 
     return recipe
-
-
-d = get_basic_recipe()
-
-recipe = rt.RecipeYAML(d["title"], description=d["description"])
-recipe.source_url = d["url"]
 
 
 def get_ingredient(ingredient, description):
@@ -78,39 +75,58 @@ def get_ingredient(ingredient, description):
 
     return i
 
+def usage():
 
-for component, ingredients in d["components"].items():
-    c = rt.ComponentYAML(component)
-    for ingredient, description in ingredients.items():
-        i = get_ingredient(ingredient, description)
-        subs = description.get("substitutions", None)
-        if subs is not None:
-            for name, ins in subs.items():
-                assert (
-                    "substitutions" not in ins.keys()
-                ), "Substitutions of substitutions is only peering into the void"
-                i.substitutions.append(get_ingredient(name, ins))
-        c.add_ingredient(i)
-    recipe.add_component(c)
+    print("Usage: ./build_base_recipe.py ."
+    "Namespace issues will probably break the script otherwise")
+    sys.exit()
 
-for stage, instructions in d["stages"].items():
-    s = rt.StageYAML(stage)
-    for ins in instructions:
-        s.add_step(rt.StepYAML(ins))
-    recipe.add_stage(s)
+if __name__ == "__main__":
 
-print(recipe.to_dict())
+    script_dir = os.path.dirname(os.path.realpath(__file__))
 
-yaml = YAML()
+    d = get_basic_recipe()
 
-with open("expanded_readable.yaml", "w") as recipe_output:
-    yaml.dump(recipe.to_dict(), recipe_output)
-recipe_output.close()
+    recipe = rt.RecipeYAML(d["title"], description=d["description"])
+    recipe.source_url = d["url"]
 
-with open("readable_compact.json", "w") as recipe_output:
-    recipe_output.write(json.dumps(recipe.to_dict(), indent=2))
-recipe_output.close()
+    for component, ingredients in d["components"].items():
+        c = rt.ComponentYAML(component)
+        for ingredient, description in ingredients.items():
+            i = get_ingredient(ingredient, description)
+            subs = description.get("substitutions", None)
+            if subs is not None:
+                for name, ins in subs.items():
+                    assert (
+                        "substitutions" not in ins.keys()
+                    ), "Substitutions of substitutions is only peering into the void"
+                    i.substitutions.append(get_ingredient(name, ins))
+            c.add_ingredient(i)
+        recipe.add_component(c)
 
-with open("compact.json", "w") as recipe_output:
-    recipe_output.write(json.dumps(recipe.to_dict()))
-recipe_output.close()
+    for stage, instructions in d["stages"].items():
+        s = rt.StageYAML(stage)
+        for ins in instructions:
+            s.add_step(rt.StepYAML(ins))
+        recipe.add_stage(s)
+
+    yaml = YAML()
+
+    readable_path = os.path.join(script_dir, "recipes/expanded_readable.yaml")
+    readable_compact_path = os.path.join(script_dir, "recipes/readable_compact.json")
+    compact_path = os.path.join(script_dir, "recipes/compact.json")
+
+    with open(readable_path, "w") as recipe_output:
+        yaml.dump(recipe.to_dict(), recipe_output)
+    recipe_output.close()
+
+    with open(readable_compact_path, "w") as recipe_output:
+        recipe_output.write(json.dumps(recipe.to_dict(), indent=2))
+    recipe_output.close()
+
+    with open(compact_path, "w") as recipe_output:
+        recipe_output.write(json.dumps(recipe.to_dict()))
+    recipe_output.close()
+
+else:
+    usage()
